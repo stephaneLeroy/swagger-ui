@@ -57,7 +57,12 @@ window.SwaggerUi = Backbone.Router.extend({
 
     // Set the callbacks
     var that = this;
-    this.options.success = function() { return that.render(); };
+    this.options.success = function() {
+        if (this.options.onSuccess){
+              this.options.onSuccess(that.api, that);
+        }
+        return that.render();
+    };
     this.options.progress = function(d) { return that.showMessage(d); };
     this.options.failure = function(d) { return that.onLoadFailure(d); };
 
